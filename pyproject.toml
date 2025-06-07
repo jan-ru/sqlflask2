@@ -1,7 +1,7 @@
 [project]
-name = "sqlflask"
-version = "0.1.1"
-description = "A minimal Flask + SQLite + HTMX project"
+name = "app"
+version = "0.2.1"
+description = "A minimal FAB + SQLite + HTMX project"
 dependencies = [
   "flask>=2.3.3",
   "gunicorn>=23.0.0",
