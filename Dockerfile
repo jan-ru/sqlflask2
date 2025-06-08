@@ -12,12 +12,20 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set environment variable for Flask
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
+ENV PORT=5000
 
-# Expose port 5000
+# Expose the port Railway will use
 EXPOSE 5000
 
-# Run Flask
-CMD ["flask", "run"]
+# Use Gunicorn to serve the Flask app
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
 
+# Copy entrypoint script and make it executable
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set default environment variable (optional)
+ENV FLASK_ENV=production
+
+# Use the entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
